@@ -1,82 +1,50 @@
-const modal = document.querySelector('.modal-container')
-window.idBotaoClicado = 0;
-let modalImage = document.getElementById("modalImage");
-function openModal(e) {
-    window.idBotaoClicado = e
-    if (idBotaoClicado === "button1") {
-        document.querySelector('#modalTitle').textContent = "Triplo bacon burger";
-        document.querySelector('#modalAutor').textContent = "por Jorge Relato";
-        modalImage.src = "assets/imgs/burger.png";
-        modal.classList.add('active')
+let modalList = [
+    { title: 'Triplo bacon burger', autor: 'por Jorge Relato', src: './assets/imgs/burger.png' },
+    { title: 'Pizza 4 estações', autor: 'por Fabiana Melo', src: './assets/imgs/pizza.png' },
+    { title: 'Espaguete ao alho', autor: 'por Júlia Kinoto', src: './assets/imgs/espaguete.png' },
+    { title: 'Lasanha mac n` cheese', autor: 'por Juliano Vieira', src: './assets/imgs/lasanha.png' },
+    { title: 'Docinhos pão-do-céu', autor: 'por Ricardo Golvea', src: './assets/imgs/doce.png' },
+    { title: 'Asinhas de frango ao barbecue', autor: 'por Vania Steroski', src: './assets/imgs/asinhas.png' },
+    { title: 'Triplo bacon burger', autor: 'por Jorge Relato', src: './assets/imgs/burger.png' },
+    { title: 'Pizza 4 estações', autor: 'por Fabiana Melo', src: './assets/imgs/pizza.png' },
+    { title: 'Espaguete ao alho', autor: 'por Júlia Kinoto', src: './assets/imgs/espaguete.png' },
+    { title: 'Lasanha mac n` cheese', autor: 'por Juliano Vieira', src: './assets/imgs/lasanha.png' },
+    { title: 'Docinhos pão-do-céu', autor: 'por Ricardo Golvea', src: './assets/imgs/doce.png' },
+    { title: 'Asinhas de frango ao barbecue', autor: 'por Vania Steroski', src: './assets/imgs/asinhas.png' }
+]
 
-    } else if (idBotaoClicado === "button2") {
-        document.querySelector('#modalTitle').textContent = "Pizza 4 estações";
-        document.querySelector('#modalAutor').textContent = "por Fabiana Melo";
-        modalImage.src = "assets/imgs/pizza.png";
-        modal.classList.add('active')
+let card = document.querySelector(".back-card-revenues")
+let cardsHTML = modalList.map((item, index) => `
+    <div class="card-revenues" onclick="receivedId(this.id)" id="${index}">
+        <img src="${item.src}" alt="${item.title}">
+        <span class="title-item">${item.title}</span>
+        <span class="autor-item">${item.autor}</span>
+    </div>
+`).join('');
 
-    } else if (idBotaoClicado === "button3") {
-        document.querySelector('#modalTitle').textContent = "Espaguete ao alho";
-        document.querySelector('#modalAutor').textContent = "por Júlia Kinoto";
-        modalImage.src = "assets/imgs/espaguete.png";
-        modal.classList.add('active')
+function showingCard() {
+    card.innerHTML = cardsHTML;
+}
 
-    } else if (idBotaoClicado === "button4") {
-        document.querySelector('#modalTitle').textContent = "Lasanha mac n` cheese";
-        document.querySelector('#modalAutor').textContent = "por Juliano Vieira";
-        modalImage.src = "assets/imgs/lasanha.png";
-        modal.classList.add('active')
+function receivedId(e) {
+    window.id = e
+    pullModalData(id)
+}
 
-    } else if (idBotaoClicado === "button5") {
-        document.querySelector('#modalTitle').textContent = "Docinhos pão-do-céu";
-        document.querySelector('#modalAutor').textContent = "por Ricardo Golvea";
-        modalImage.src = "assets/imgs/doce.png";
-        modal.classList.add('active')
+function pullModalData(idModal) {
+    let modal = document.querySelector('.modal-container')
+    let modalImage = document.querySelector('.modalImage');
+    let modalTitle = document.querySelector('.modalTitle');
+    let modalAutor = document.querySelector('.modalAutor');
 
-    } else if (idBotaoClicado === "button6") {
-        document.querySelector('#modalTitle').textContent = "Asinhas de frango ao barbecue";
-        document.querySelector('#modalAutor').textContent = "por Vania Steroski";
-        modalImage.src = "assets/imgs/asinhas.png";
-        modal.classList.add('active')
-
-    } else if (idBotaoClicado === "button7") {
-        document.querySelector('#modalTitle').textContent = "Triplo bacon burger";
-        document.querySelector('#modalAutor').textContent = "por Jorge Relato";
-        modalImage.src = "assets/imgs/burger.png";
-        modal.classList.add('active')
-
-    } else if (idBotaoClicado === "button8") {
-        document.querySelector('#modalTitle').textContent = "Pizza 4 estações";
-        document.querySelector('#modalAutor').textContent = "por Fabiana Melo";
-        modalImage.src = "assets/imgs/pizza.png";
-        modal.classList.add('active')
-
-    } else if (idBotaoClicado === "button9") {
-        document.querySelector('#modalTitle').textContent = "Espaguete ao alho";
-        document.querySelector('#modalAutor').textContent = "por Júlia Kinoto";
-        modalImage.src = "assets/imgs/espaguete.png";
-        modal.classList.add('active')
-
-    } else if (idBotaoClicado === "button10") {
-        document.querySelector('#modalTitle').textContent = "Lasanha mac n` cheese";
-        document.querySelector('#modalAutor').textContent = "por Juliano Vieira";
-        modalImage.src = "assets/imgs/lasanha.png";
-        modal.classList.add('active')
-
-    } else if (idBotaoClicado === "button11") {
-        document.querySelector('#modalTitle').textContent = "Docinhos pão-do-céu";
-        document.querySelector('#modalAutor').textContent = "por Ricardo Golvea";
-        modalImage.src = "assets/imgs/doce.png";
-        modal.classList.add('active')
-
-    } else if (idBotaoClicado === "button12") {
-        document.querySelector('#modalTitle').textContent = "Asinhas de frango ao barbecue";
-        document.querySelector('#modalAutor').textContent = "por Vania Steroski";
-        modalImage.src = "assets/imgs/asinhas.png";
-        modal.classList.add('active')
-    }
+    modalImage.setAttribute('src', modalList[idModal].src);
+    modalTitle.textContent = modalList[idModal].title
+    modalAutor.textContent = modalList[idModal].autor
+    modal.classList.add('active')
 }
 
 function closeModal() {
     modal.classList.remove('active')
 }
+
+showingCard()
