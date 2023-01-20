@@ -13,7 +13,7 @@ let modalList = [
     { title: 'Asinhas de frango ao barbecue', autor: 'por Vania Steroski', src: './assets/imgs/asinhas.png' }
 ]
 
-let container = document.querySelector(".back-card-revenues")
+let card = document.querySelector(".back-card-revenues")
 let cardsHTML = modalList.map((item, index) => `
     <div class="card-revenues" onclick="receivedId(this.id)" id="${index}">
         <img src="${item.src}" alt="${item.title}">
@@ -22,8 +22,8 @@ let cardsHTML = modalList.map((item, index) => `
     </div>
 `).join('');
 
-function teste() {
-    container.innerHTML = cardsHTML;
+function showingCard() {
+    card.innerHTML = cardsHTML;
 }
 
 function receivedId(e) {
@@ -47,4 +47,4 @@ function closeModal() {
     modal.classList.remove('active')
 }
 
-teste()
+showingCard()
